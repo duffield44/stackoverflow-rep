@@ -12,6 +12,7 @@ $(document).ready( function() {
 		// get the value of the tags the user submitted
 		var tags = $(this).find("input[name='answerers']").val();
 		console.log(tags);
+		getInspiration(tags);
 	});
 });
 
@@ -93,6 +94,25 @@ var getUnanswered = function(tags) {
 		var errorElem = showError(error);
 		$('.search-results').append(errorElem);
 	});
+};
+
+	var getInspiration = function(tags) {
+
+	// the parameters we need to pass in our request to StackOverflow's API
+		var request = {
+			period: 'all_time',
+			site: 'stackoverflow'
+		};
+
+		var result = $.ajax({
+			url: "http://api.stackexchange.com/2.2/tags/" + tags + "/top-answerers",
+			data: request,
+			dataType: "jsonp",
+			type: "GET",
+		})
+		.done(function(result){
+			console.log(result);
+		});
 };
 
 
