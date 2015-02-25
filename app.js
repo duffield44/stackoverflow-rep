@@ -49,6 +49,13 @@ var showQuestion = function(question) {
 	return result;
 };
 
+// this function takes the answerer object returned by StackOverflow 
+// and creates new result to be appended to DOM
+
+var showAnswerer = function(answerer) {
+	console.log("showAnswerer invoked");
+};
+
 
 // this function takes the results object from StackOverflow
 // and creates info about search results to be appended to DOM
@@ -109,8 +116,15 @@ var getUnanswered = function(tags) {
 			dataType: "jsonp",
 			type: "GET",
 		})
-		.done(function(data){
-			console.log(data);
+		.done(function(result){
+			var searchResults = showSearchResults(tags, result.items.length);
+			console.log(result);
+			$('.search-results').html(searchResults);
+
+			$.each(result.items, function(i, item){
+				var answerers = showAnswerer(item);
+				$('.results').append(answerers);
+			});
 		});
 		
 	};
