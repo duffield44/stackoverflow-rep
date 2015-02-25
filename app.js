@@ -53,7 +53,17 @@ var showQuestion = function(question) {
 // and creates new result to be appended to DOM
 
 var showAnswerer = function(answerer) {
-	console.log("showAnswerer invoked");
+	console.log(answerer.user.link);
+
+	//clones the result template code
+	var result = $('.templates .answerer').clone();
+
+	// set the answerer properties in result
+	var answererElem = result.find('.name a');
+	answererElem.attr('href', answerer.user.link);
+	answererElem.text(answerer.user.display_name);
+
+	return result;
 };
 
 
@@ -125,8 +135,7 @@ var getUnanswered = function(tags) {
 				var answerers = showAnswerer(item);
 				$('.results').append(answerers);
 			});
-		});
-		
+		});		
 	};
 
 
