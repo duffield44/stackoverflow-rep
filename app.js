@@ -63,6 +63,14 @@ var showAnswerer = function(answerer) {
 	answererElem.attr('href', answerer.user.link);
 	answererElem.text(answerer.user.display_name);
 
+	// set the post count properties of answerer
+	var postCount = result.find('.post-count');
+	postCount.text(answerer.post_count);
+
+	// set the reputation of answerer
+	var reputationElem = result.find('.reputation');
+	reputationElem.text(answerer.user.reputation);
+
 	return result;
 };
 
