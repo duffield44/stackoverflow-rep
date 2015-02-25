@@ -143,7 +143,11 @@ var getUnanswered = function(tags) {
 				var answerers = showAnswerer(item);
 				$('.results').append(answerers);
 			});
-		});		
+		})
+		.fail(function(jqXHR, error, errorThrown){
+			var errorElem = showError(error);
+			$('.search-results').append(errorElem);
+		});	
 	};
 
 
