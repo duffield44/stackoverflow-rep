@@ -82,7 +82,7 @@ var getUnanswered = function(tags) {
 		})
 	.done(function(result){
 		var searchResults = showSearchResults(request.tagged, result.items.length);
-
+		console.log(result);	
 		$('.search-results').html(searchResults);
 
 		$.each(result.items, function(i, item) {
@@ -98,22 +98,22 @@ var getUnanswered = function(tags) {
 
 	var getInspiration = function(tags) {
 
-	// the parameters we need to pass in our request to StackOverflow's API
+		// the parameters we need to pass in our request to StackOverflow's API
 		var request = {
-			period: 'all_time',
 			site: 'stackoverflow'
 		};
 
 		var result = $.ajax({
-			url: "http://api.stackexchange.com/2.2/tags/" + tags + "/top-answerers",
+			url: "http://api.stackexchange.com/2.2/tags/" + tags + "/top-answerers/all_time",
 			data: request,
 			dataType: "jsonp",
 			type: "GET",
 		})
-		.done(function(result){
-			console.log(result);
+		.done(function(data){
+			console.log(data);
 		});
-};
+		
+	};
 
 
 
